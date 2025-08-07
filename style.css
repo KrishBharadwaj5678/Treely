@@ -1,0 +1,622 @@
+:not(:defined)>* {
+    display: none;
+}
+
+model-viewer {
+  background-color: #eee;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Info icon button */
+#info-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: linear-gradient(135deg, #4285f4, #1e3a8a);
+  color: white;
+  font-size: 21px;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#info-icon:hover {
+  background: linear-gradient(135deg, #1e3a8a, #4285f4);
+  transform: scale(1.1);
+}
+
+/* Camera icon button */
+#screenshot-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(135deg, #fbbc05, #f1c40f);
+  color: white;
+  font-size: 21px;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#screenshot-button:hover {
+  background: linear-gradient(135deg, #f1c40f, #fbbc05);
+  transform: scale(1.1);
+}
+
+/* Modern Info Box */
+#info-display {
+  position: absolute;
+  top: 75px;
+  right: 18px;
+  background: linear-gradient(135deg, #ffffff, #f0f4f8);
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  display: none;
+  white-space: pre-wrap;
+  animation: fadeIn 0.3s ease-out;
+}
+
+#info-display h3 {
+  margin: 0 0 4px 0;
+  font-size: 21px;
+  font-weight: bold;
+  color: #1e3a8a;
+  text-align: center;
+}
+
+#info-display p {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+}
+
+/* Skybox toggle button */
+#toggle-skybox-button {
+  position: absolute;
+  top: 80px;
+  left: 16px;
+  background: linear-gradient(135deg, #6c63ff, #7c4dff);
+  color: white;
+  font-size: 21px;
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+#toggle-skybox-button:hover {
+  background: linear-gradient(135deg, #7c4dff, #6c63ff);
+  transform: scale(1.1);
+}
+
+#skybox-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+/* Responsive tweaks for smaller screens */
+@media (max-width: 480px) {
+  #skybox-popup {
+    width: 95%;
+    padding: 16px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  #skybox-popup {
+    width: 90%;
+    padding: 18px;
+    font-size: 15px;
+  }
+}
+
+/* Base Close Button Styling */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  z-index: 10000;
+}
+
+/* Hover & Focus States */
+.close-btn:hover,
+.close-btn:focus {
+  background-color: rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  color: #D00000;
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 480px) {
+  .close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+    padding: 8px;
+    top: 11px;
+    right: 15px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .close-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    padding: 8px;
+    top: 11px;
+    right: 15px;
+  }
+}
+
+/* Title */
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Skybox image container */
+.skybox-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+/* Individual skybox images */
+.skybox-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect for images */
+.skybox-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Optional active state to highlight the selected image */
+.skybox-img.selected {
+  border: 2px solid #ff0000;
+  box-shadow: 0px 8px 16px rgba(255, 0, 0, 0.3);
+}
+
+/* Audio Icon */
+#audio-icon,
+#heart-icon,
+#music-icon,
+#setting-icon,
+#tree-icon {
+  position: absolute;
+  width: 53px;
+  height: 53px;
+  top: 80px;
+  right: 15px;
+  background: linear-gradient(135deg, #ff0099, #a84983);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 21px;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+#audio-icon:hover {
+  transform: scale(1.1);
+}
+
+#tree-icon {
+  top: 210px;
+  left: 15px;
+  font-size: 25px;
+  background: linear-gradient(135deg, #19ad8d, #0ea17a);
+}
+
+#tree-icon:hover {
+  transform: scale(1.1);
+}
+
+#heart-icon {
+  top: 145px;
+  left: 15px;
+  font-size: 26px;
+  background: linear-gradient(135deg, #ff4d6d, #ff7a8d);
+}
+
+#heart-icon:hover {
+  background: linear-gradient(135deg, #ff4081, #ff80ab);
+  transform: scale(1.1);
+}
+
+#music-icon {
+  top: 145px;
+  right: 15px;
+  font-size: 23px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+}
+
+#music-icon:hover {
+  background: linear-gradient(135deg, #009efd, #0965d4);
+  transform: scale(1.1);
+}
+
+#setting-icon {
+  top: 210px;
+  right: 15px;
+  font-size: 23px;
+  background: linear-gradient(135deg, #fc4a1a, #e35e39);
+}
+
+#setting-icon:hover {
+  background: linear-gradient(135deg, #e13d0f, #a72c0a);
+  transform: scale(1.1);
+}
+
+/* Popup Background */
+.popup-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Settings Popup */
+.controls {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  text-align: center;
+  position: relative;
+}
+
+/* Close Button Setting */
+#close-btn-setting {
+  width: 35px;
+  height: 35px;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+/* Styling for the Texture Selection Checkboxes */
+.texture-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
+.texture-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f4f4f4;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid transparent;
+}
+
+.texture-label:hover {
+  background: #e0e0e0;
+}
+
+.texture-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.texture-checkbox:checked {
+  border: 1px solid #007bff;
+}
+
+.texture-checkbox:checked::after {
+  content: '✅';
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none;
+  width: 350px;
+  text-align: center;
+}
+
+.popup.active {
+  display: block;
+}
+
+.slider {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0px 50px 0px 20px;
+}
+
+.slides {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  margin-right: 30px;
+}
+
+.slide {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #fff;
+  margin-right: 10px;
+  border-radius: 10px;
+  border: none;
+  display: flex;
+}
+
+.slide.selected {
+  border: 2px solid #4285f4;
+}
+
+div#info-display {
+  z-index: 1000;
+}
+
+div#info-display h3.treename {
+  font-size: 22px;
+}
+
+div#info-display p.carinfo {
+  font-size: 17px;
+}
+
+/* Styling of AR Button */
+
+.transparent {
+  background-color: transparent;
+  border-radius: 50%;
+  border: none;
+  position: relative;
+  width: 65px;
+  height: 65px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.ar-icon {
+  position: absolute;
+  top: 110px;
+  left: 0px;
+}
+
+/* Responsive for Tablets */
+@media (max-width: 768px) {
+
+    /* Adjust model-viewer for smaller screens */
+    model-viewer {
+      height: 80vh;
+    }
+
+    /* Info box positioning */
+    #info-display {
+      top: 71px;
+      right: 20px;
+      font-size: 14px;
+      padding: 12px;
+    }
+
+    /* Slider button size for smaller screens */
+    .slide {
+      width: 80px;
+      height: 80px;
+    }
+
+    /* Adjust slider for smaller screens */
+    .slider {
+      bottom: 8px;
+      margin: 0 20px;
+    }
+
+    div#info-display h3.treename {
+      font-size: 20px;
+    }
+
+    div#info-display p.carinfo {
+      font-size: 17px;
+    }
+
+    /* Adjust size and positioning for tablets */
+    .transparent {
+      padding: 12px;
+    }
+
+    .ar-icon {
+      width: 55px;
+      height: 55px;
+      left: 5px;
+      top: 270px;
+    }
+}
+
+/* Responsive for Mobiles */
+@media (max-width: 480px) {
+
+    /* Adjust model-viewer further for small screens */
+    model-viewer {
+      height: 60vh;
+    }
+
+    /* Info box and icon for very small screens */
+    #info-display {
+      top: 66px;
+      right: 16px;
+      width: 85%;
+      font-size: 12px;
+    }
+
+    /* Slider button size for very small screens */
+    .slide {
+      width: 60px;
+      height: 60px;
+    }
+
+    /* Adjust slider for very small screens */
+    .slider {
+      bottom: 4px;
+      margin: 0 10px;
+    }
+
+    div#info-display h3.treename {
+      font-size: 21px;
+    }
+
+    div#info-display p.carinfo {
+      font-size: 16px;
+    }
+
+}
+
+/* Responsive Design for AR Button (Laptops/PC) */
+@media (max-width: 1500px) {
+
+    /* Adjust size and positioning for mobile */
+    .transparent {
+      padding: 10px;
+    }
+
+    .ar-icon {
+      width: 58px;
+      height: 58px;
+      left: 5px;
+      top: 270px;
+    }
+}
+
+/* Responsive Design for AR Button (Mobiles) */
+@media (max-width: 480px) {
+
+    /* Adjust size and positioning for mobile */
+    .transparent {
+      padding: 10px;
+    }
+
+    .ar-icon {
+      width: 55px;
+      /* Smaller size for mobile */
+      height: 55px;
+      left: 5px;
+      top: 270px;
+    }
+}

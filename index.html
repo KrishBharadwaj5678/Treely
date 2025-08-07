@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/web-app-manifest-512x512.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/web-app-manifest-192x192.png"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script
+      type="module"
+      src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"
+    ></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <title>Treely</title>
+  </head>
+
+  <body>
+    <model-viewer
+      src="./models/Joshuatree/Joshuatree.glb"
+      ios-src="./models/Joshuatree/Joshuatree.usdz"
+      style="width: 100vw; height: 100vh"
+      camera-controls
+      exposure="1"
+      shadow-intensity="7"
+      touch-action="pan-y"
+      ar
+      scale="1 1 1"
+    >
+      <!-- Info Icon -->
+      <button id="info-icon">
+        <i class="fas fa-info"></i>
+      </button>
+
+      <div id="info-display"></div>
+
+      <!-- Benefits Feature -->
+      <button id="audio-icon">
+        <i class="fas fa-play"></i>
+      </button>
+
+      <!-- Heart Icon  -->
+      <button id="heart-icon">
+        <i class="fa-solid fa-heart"></i>
+      </button>
+
+      <!-- Trees Icon  -->
+      <a href="https://www.givemetrees.org/" target="_blank">
+        <button id="tree-icon">
+          <i class="fa-solid fa-tree"></i>
+        </button>
+      </a>
+
+      <!-- Backgroound Music  -->
+      <button id="music-icon">
+        <i class="fa-solid fa-volume-off"></i>
+      </button>
+
+      <!-- Setting -->
+      <button id="setting-icon">
+        <i class="fa-solid fa-gear"></i>
+      </button>
+
+      <!-- Popup -->
+      <div class="popup-bg" id="popup-bg">
+        <div class="controls">
+          <button class="close-btn" id="close-btn-setting">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+
+          <!-- Texture Selection -->
+          <div>
+            <p>Select Textures:</p>
+            <div id="texture-container" class="texture-container">
+              <!-- Checkboxes will be added dynamically here -->
+            </div>
+          </div>
+
+          <div>
+            <p>Metalness: <span id="metalness-value">1</span></p>
+            <input
+              id="metalness"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0"
+            />
+          </div>
+          <div>
+            <p>Roughness: <span id="roughness-value">0</span></p>
+            <input
+              id="roughness"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value="0"
+            />
+          </div>
+        </div>
+      </div>
+
+      <button id="screenshot-button">
+        <i class="fas fa-camera"></i>
+      </button>
+      <!-- Camera Icon Button -->
+
+      <button id="toggle-skybox-button">
+        <i class="fas fa-image"></i>
+      </button>
+      <!-- Button to Toggle Skybox -->
+
+      <!-- Skybox Selection Popup -->
+      <div id="skybox-popup">
+        <!-- Close button with Font Awesome icon -->
+        <button id="close-btn" class="close-btn">
+          <i class="fas fa-times"></i>
+          <!-- Font Awesome close icon -->
+        </button>
+
+        <h3>Select Environment</h3>
+
+        <div id="skybox-container" class="skybox-container">
+          <img src="./assets/Meadow2.jpg" alt="Meadow 2" class="skybox-img" />
+          <img
+            src="./assets/DrackensteinQuarry.jpg"
+            alt="Drackenstein Quarry"
+            class="skybox-img"
+          />
+          <img
+            src="./assets2/RuralAsphaltRoad.jpg"
+            alt="Rural Asphalt Road"
+            class="skybox-img"
+          />
+          <img
+            src="./assets2/SymmetricalGarden2.jpg"
+            alt="Symmetrical Garden 2"
+            class="skybox-img"
+          />
+          <img
+            src="./assets3/AlpsField.jpg"
+            alt="Alps Field"
+            class="skybox-img"
+          />
+          <img
+            src="./assets3/Lilienstein.jpg"
+            alt="Lilienstein"
+            class="skybox-img"
+          />
+          <img
+            src="./assets4/J&EGray02.jpg"
+            alt="J&E Gray 02"
+            class="skybox-img"
+          />
+          <img src="./assets3/goegap.jpg" alt="Goegap" class="skybox-img" />
+          <img
+            src="./assets5/RestingPlace2.jpg"
+            alt="Resting Place 2"
+            class="skybox-img"
+          />
+          <img
+            src="./assets5/EveningMeadow.jpg"
+            alt="Evening Meadow"
+            class="skybox-img"
+          />
+        </div>
+      </div>
+
+      <div class="slider">
+        <div class="slides">
+          <!-- First Model -->
+          <button
+            class="slide selected"
+            onclick="switchSrc(this, './models/Joshuatree', 'Joshuatree', 'Joshua Tree','/audio/Joshuatree.mp3')"
+            style="background-image: url('./models/Joshuatree/Joshuatree.png')"
+          ></button>
+
+          <!-- Second Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models/DatePalm', 'DatePalm', 'Date Palm','/DatePalm.mp3')"
+            style="background-image: url('./models/DatePalm/DatePalm.png')"
+          ></button>
+
+          <!-- Third Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_2/BlueJacaranda', 'BlueJacaranda', 'Blue Jacaranda')"
+            style="
+              background-image: url('./models_2/BlueJacaranda/BlueJacaranda.png');
+            "
+          ></button>
+
+          <!-- Fourth Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_2/SourOrange', 'SourOrange', 'Sour Orange')"
+            style="
+              background-image: url('./models_2/SourOrange/SourOrange.png');
+            "
+          ></button>
+
+          <!-- Fifth  Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_3/RedHorseChestnut', 'RedHorseChestnut', 'Red Horse Chestnut')"
+            style="
+              background-image: url('./models_3/RedHorseChestnut/RedHorseChestnut.png');
+            "
+          ></button>
+
+          <!-- Six  Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_4/HongKongOrchidTree', 'HongKongOrchidTree', 'Hong Kong Orchid Tree')"
+            style="
+              background-image: url('./models_4/HongKongOrchidTree/HongKongOrchidTree.png');
+            "
+          ></button>
+
+          <!-- Seventh  Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_3/AfricanContinentalBaobab', 'AfricanContinentalBaobab', 'African Continental Baobab')"
+            style="
+              background-image: url('./models_3/AfricanContinentalBaobab/AfricanContinentalBaobab.png');
+            "
+          ></button>
+
+          <!-- Eight  Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_3/DragonTree', 'DragonTree', 'Dragon Tree')"
+            style="
+              background-image: url('./models_3/DragonTree/DragonTree.png');
+            "
+          ></button>
+
+          <!-- Ninth  Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_5/ButterflyPalm', 'ButterflyPalm', 'Butterfly Palm')"
+            style="
+              background-image: url('./models_5/ButterflyPalm/ButterflyPalm.png');
+            "
+          ></button>
+
+          <!-- Tenth Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_4/CommonFigTree', 'CommonFigTree', 'Common Fig Tree')"
+            style="
+              background-image: url('./models_4/CommonFigTree/CommonFigTree.png');
+            "
+          ></button>
+
+          <!-- 11th Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_6/CabbageTree', 'CabbageTree', 'Cabbage Tree')"
+            style="
+              background-image: url('./models_6/CabbageTree/CabbageTree.png');
+            "
+          ></button>
+
+          <!-- 12th Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_4/ChineseHibiscus', 'ChineseHibiscus', 'Chinese Hibiscus')"
+            style="
+              background-image: url('./models_4/ChineseHibiscus/ChineseHibiscus.png');
+            "
+          ></button>
+
+          <!-- 13th Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_6/JapaneseSagoPalm', 'JapaneseSagoPalm', 'Japanese Sago Palm')"
+            style="
+              background-image: url('./models_6/JapaneseSagoPalm/JapaneseSagoPalm.png');
+            "
+          ></button>
+
+          <!-- 14th Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_6/CaliforniaFanPalm', 'CaliforniaFanPalm', 'California Fan Palm')"
+            style="
+              background-image: url('./models_6/CaliforniaFanPalm/CaliforniaFanPalm.png');
+            "
+          ></button>
+
+          <!-- 15th Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_7/LemonTree', 'LemonTree', 'Lemon Tree')"
+            style="background-image: url('./models_7/LemonTree/LemonTree.png')"
+          ></button>
+
+          <!-- 16th Model -->
+          <button
+            class="slide"
+            onclick="switchSrc(this, './models_6/MexicanOrangeBlossom', 'MexicanOrangeBlossom', 'Mexican Orange Blossom')"
+            style="
+              background-image: url('./models_6/MexicanOrangeBlossom/MexicanOrangeBlossom.png');
+            "
+          ></button>
+        </div>
+      </div>
+
+      <button
+        slot="ar-button"
+        style="
+          background-color: transparent;
+          border-radius: 50%;
+          border: none;
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          padding: 10px;
+          cursor: pointer;
+        "
+        class="transparent"
+      >
+        <img src="./assets/ar.png" width="69px" height="69px" class="ar-icon" />
+      </button>
+    </model-viewer>
+
+    <script src="./script.js" defer></script>
+
+    <script type="module"></script>
+  </body>
+</html>
