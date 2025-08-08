@@ -24,5 +24,5 @@ Treely is an interactive web platform that allows users to explore different tre
 
 | **Technology**              | **Description**                                                                         |
 | --------------------------- | --------------------------------------------------------------------------------------- |
-| **HTML5, CSS3, JavaScript** | Used to build the interactive web interface.                                            |
-| **model-viewer**            | Web component for rendering 3D models.                                                  |
+| **🌐 HTML5, CSS3, JavaScript** | Used to build the interactive web interface.                                            |
+| **🖥️ model-viewer**         | Web component for rendering 3D models.                                                  |
