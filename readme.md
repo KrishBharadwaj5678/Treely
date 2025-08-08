@@ -1,6 +1,6 @@
 # Treely 🌳
 
-Treely is an interactive web platform that allows users to explore different trees in 3D, learn about their benefits, and experience them in augmented reality (AR).
+Treely is an interactive web platform that allows users to explore different trees in 3D, learn about their benefits, and experience them in augmented reality (AR). It's the perfect way to connect with nature digitally.
 
 ---
 
